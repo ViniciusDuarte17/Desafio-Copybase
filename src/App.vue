@@ -4,7 +4,11 @@
       <SideBar />
     </div>
     <div class="column is-three-quarter">
-      ??
+      <Form />
+
+      <div class="list">
+        <CardPokemon />
+      </div>
     </div>
   </main>
 </template>
@@ -12,13 +16,21 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import SideBar from "./components/SideBar.vue";
+import Form from "./components/Form.vue";
+import CardPokemon from "./components/CardPokemon.vue";
 
 export default defineComponent({
-    name: "App",
-    components: { SideBar }
+  name: "App",
+  components: {
+    SideBar,
+    Form,
+    CardPokemon
+}
 })
 </script>
 
 <style>
-
+.list {
+  padding: 1.25rem;
+}
 </style>
