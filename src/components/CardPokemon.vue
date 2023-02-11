@@ -25,14 +25,13 @@ export default defineComponent( {
 
 <style>
 img{
-    display: flex;    
-    align-items: center;
     width: 30%;
 }
 
 figure{
     display: flex;    
     align-items: center;
+    justify-content: center;
 }
 
 </style>
