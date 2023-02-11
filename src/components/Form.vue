@@ -10,6 +10,7 @@
           type="text"
           class="input"
           placeholder="Pesquise seu pokemon preferido"
+          v-model="nomePokemon"
         />
       </div>
       <div class="column">
@@ -25,7 +26,15 @@ import Button from "./Button.vue";
 
 export default defineComponent({
   name: "Form",
+  data() {
+    return {
+      nomePokemon: ''
+    }
+  },
+  components: {Button},
 
-  components: {Button}
+  methods: {
+   
+  }
 });
 </script>
