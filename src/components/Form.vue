@@ -6,15 +6,7 @@
         role="form"
         aria-label="area de pesquisa da pokemon"
       >
-        <input
-          type="text"
-          class="input"
-          placeholder="Pesquise seu pokemon preferido"
-          v-model="nomePokemon"
-        />
-      </div>
-      <div class="column">
-        <Button />
+        <slot></slot>
       </div>
     </div>
   </div>
@@ -26,6 +18,8 @@ import Button from "./Button.vue";
 
 export default defineComponent({
   name: "Form",
+  
+  emits: ["aoPesquisarPokemon"],
   data() {
     return {
       nomePokemon: ''
@@ -33,8 +27,5 @@ export default defineComponent({
   },
   components: {Button},
 
-  methods: {
-   
-  }
 });
 </script>

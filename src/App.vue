@@ -4,37 +4,26 @@
       <SideBar />
     </div>
     <div class="column is-three-quarter">
-      <!-- <Form /> -->
-      <div class="box">
-    <div class="columns">
-      <div
-        class="column is-8"
-        role="form"
-        aria-label="area de pesquisa da pokemon"
-      >
+      <Form>
         <input
           type="text"
           class="input"
           placeholder="Pesquise seu pokemon preferido"
           v-model="nomePokemon"
-          
         />
-        <input
-          type="submit"
-          placeholder="Pesquise seu pokemon preferido"
-          v-on:click="searchPokemon"
-          value="Enviar"
-          
-        />
-      </div>
-      <!-- <div class="column">
-        <Button @some-event="searchPokemon" />
-      </div> -->
-    </div>
-  </div>
-
+        <div class="column">
+          <Button @aoPesquisarPokemon="searchPokemon" />
+        </div>
+      </Form>
       <div class="list">
-        <CardPokemon />
+        <CardPokemon
+          v-for="(pokem, index) in pokemon"
+          :key="index"
+          :pokemons="pokem"
+        />
+        <Box v-if="listPokemonEmpty">
+          Você ainda não buscou por nenhum pokemon :( 
+        </Box>
       </div>
     </div>
   </main>
@@ -45,42 +34,47 @@ import { defineComponent } from "vue";
 import SideBar from "./components/SideBar.vue";
 import Form from "./components/Form.vue";
 import CardPokemon from "./components/CardPokemon.vue";
-import { getPokemon } from "./services/getPokemon";
 import Button from "./components/Button.vue";
+import { getPokemon } from "./services/getPokemon";
+import Box from './components/Box.vue';
+
 
 export default defineComponent({
   name: "App",
-  emits: ['aoPesquisarPokemon'],
+  emits: ["aoPesquisarPokemon"],
+
   data() {
     return {
-      nameReal: '',
-      nomePokemon: ''
-    }
+      nomePokemon: "",
+      pokemon: [],
+    };
   },
-  
+  computed: {
+    listPokemonEmpty() {
+      return this.pokemon.length === 0
+   }
+  },
   components: {
     SideBar,
     Form,
     CardPokemon,
-    Button
+    Button,
+    Box
   },
-  
+
+
   methods: {
-    searchPokemon(e: any) {
-      e.preventDefault()
-     this.$emit('aoPesquisarPokemon', {
-      descricao: this.nomePokemon
-     }) 
-     this.nameReal = this.nomePokemon
-     this.nomePokemon = '';
-    }
+    searchPokemon() {
+      this.$emit("aoPesquisarPokemon", {
+        name: this.nomePokemon,
+      });
+
+     getPokemon(this.nomePokemon, this.pokemon);
+     
+      this.nomePokemon = "";
+    },
   },
-  mounted() {
-      getPokemon(this.nameReal)
-  }
-})
-
-
+});
 </script>
 
 <style>

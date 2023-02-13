@@ -1,12 +1,12 @@
 <template>
   <div class="cart">
     <header class="card-header">
-      <p class="card-header-title">nome do pokemon</p>
+      <p class="card-header-title">{{ pokemons.name }}</p>
     </header>
     <div class="card-image">
       <figure >
         <img
-          src="https://i.pinimg.com/originals/f2/95/76/f295769d9bd3c34ffc552e837f5304ae.png"
+          :src="pokemons.url"
           alt="pokemon"
         />
       </figure>
@@ -15,17 +15,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
+import { IPokemon } from '../interface/IPokemon';
 
 
 export default defineComponent( {
-    name: 'CardPokemon'
-})
+    name: 'CardPokemon',
+
+    props: {
+      pokemons: {
+            type: Object as PropType<IPokemon>,
+            required: true
+        }
+    },
+    })
+   
 </script>
 
 <style>
 img{
-    width: 30%;
+    width: 16%;
 }
 
 figure{
